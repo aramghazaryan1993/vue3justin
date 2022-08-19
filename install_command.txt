@@ -1,5 +1,5 @@
-         
-				1) Социальная сеть Laravel 8 + Vue.js 3 Урок 1 - УСТАНОВКА	
+
+				1) Социальная сеть Laravel 8 + Vue.js 3 Урок 1 - УСТАНОВКА
 
 1) https://youtu.be/uoZXQfNIxa4?list=PLqtxAXthDLackn74j5o5JgmSnYW8cLsQj
 
@@ -15,7 +15,7 @@ npm install -g @vue/cli
 
                                        Open terminal laravel project
 
-1) composer require laravel/ui 
+1) composer require laravel/ui
 2) php artisan ui vue --auth
 
 3) Open << package.json >>
@@ -38,7 +38,7 @@ remove << require('./bootstrap'); >>
 
 5) Open folder resources/sass/app.scss
 
-remove 
+remove
 <<
       // Bootstrap
        @import '~bootstrap/scss/bootstrap';
@@ -48,3 +48,13 @@ remove
 6) npm install
 
 7) npm run watch
+
+
+
+
+                                    Социальная сеть Laravel 8 + Vue.js 3 Урок 2 - VUE-ROUTER
+
+2) https://youtu.be/5_kfr0NTmD8?list=PLqtxAXthDLackn74j5o5JgmSnYW8cLsQj
+
+1) npm install vue-router@4
+
