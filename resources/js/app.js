@@ -9,7 +9,7 @@
 window.Vue = require('vue').default;
 import { createApp } from "vue";
 import store from './store'
-import router from "./router";
+import router from "./router/router";
 import components from "./components/UI";
 
 const app = createApp({})
