@@ -4,12 +4,14 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import {comment} from "postcss";
+// import {comment} from "postcss";
 
 window.Vue = require('vue').default;
 import { createApp } from "vue";
+import store from './store'
 import router from "./router";
 import components from "./components/UI";
+
 const app = createApp({})
 
 /**
@@ -28,7 +30,7 @@ components.forEach(component => {
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 app.component('example-component', require('./components/ExampleComponent.vue').default);
-app.use(router).mount("#app")
+app.use(router).use(store).mount("#app")
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
