@@ -14,20 +14,23 @@ use Illuminate\Http\Request;
 |
 */
 
-Auth::routes();
+//Auth::routes();
 
-Route::get('/', function () {
+//Route::get('/', function () {
+//    return view('index');
+//});
+
+Route::get('{any}', function () {
     return view('index');
-});
+})->where('any', '.*');
 
 
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::middleware('auth:sanctum')->get('/user', function(request $request){
-//    return $request->user();
-
-    Route::post('register', [AuthController::class, "register"]);
-});
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//
+//Route::middleware('auth:sanctum')->get('/user', function(request $request){
+////    return $request->user();
+//
+//    Route::post('register', [AuthController::class, "register"]);
+//});
 
 
