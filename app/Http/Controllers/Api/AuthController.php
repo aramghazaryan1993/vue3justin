@@ -57,10 +57,10 @@ class AuthController extends Controller
         ]);
 
         if(!$users) {
-            return response()->json(['Success' => false, "message" => "Registracion failed"], 500);
+            return response()->json(["success" => false, "message" => 'Registration failed'], 500);
         }
 
-        return response()->json(["success" => true, "message" => "Registracion successed"], 500);
+        return response()->json(["success" => true, "message" => 'Registration succeeded']);
 
     }
 }
