@@ -18,17 +18,17 @@ const routes = [
         path: "/login",
         name: Login,
         component: Login,
-        meta: {
-            middleware: [Middleware.guest]
-        }
+        // meta: {
+        //     middleware: [Middleware.guest]
+        // }
     },
     {
         path: "/register",
         name: Register,
         component: Register,
-        meta: {
-            middleware: [Middleware.guest]
-        }
+        // meta: {
+        //     middleware: [Middleware.guest]
+        // }
     },
     {
         path: "/dashboard",
