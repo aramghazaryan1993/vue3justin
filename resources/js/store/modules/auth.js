@@ -2,7 +2,7 @@ import axios from "axios";
 
 const state = {
     userDetails: {},
-    isLoggedIn: false
+    isLoggedIn: true
 }
 
 const actions = {
@@ -29,29 +29,51 @@ const actions = {
     },
 
     loginUser(ctx, payload) {
-        alert('sdsd')
         return new Promise((resolve, reject) => {
             axios
                 .post("/api/login", payload)
                 .then(response => {
                     if (response.data.access_token) {
-                        loacalStorage.setItem('token', response.data.access_token)
+                        localStorage.setItem('token', response.data.access_token)
                         window.location.replace("/dashboard")
                     }
                 }).catch((error) => {
+                console.log(error)
                     reject(error)
             })
+        })
+    },
+
+    logout(ctx) {
+        return new Promise((resolve) => {
+            localStorage.removeItem('token');
+            ctx.commit("setLoggedIn", false)
+            resolve(true)
+            window.location.replace('login')
+        })
+    },
+
+    setLoggedInstate(ctx) {
+        return new Promise(resolve => {
+            if (localStorage.getItem('token')) {
+                ctx.commit('setLoggedIn', true)
+                resolve(true)
+            }
+            ctx.commit('setLoggedIn', false)
+            resolve(false)
         })
     }
 }
 
 const mutations = {
-
+    setLoggedIn(state, payload) {
+        state.isLoggedIn = payload
+    }
 }
 
 const getters = {
     loggedIn(state) {
-        return state.loggedIn
+        return state.isLoggedIn
     },
     userDetails(state) {
         return state.userDetails

@@ -1,9 +1,9 @@
 
 const state = {
     user: {
-        loggedIn: true,
-        isSubscribed: true,
-        token: !!localStorage.getItem('token') || ''
+        loggedIn: false,
+        isSubscribed: false,
+        token: localStorage.getItem('token') || ''
     },
 }
 
