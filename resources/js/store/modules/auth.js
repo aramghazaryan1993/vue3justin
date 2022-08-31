@@ -53,6 +53,27 @@ const actions = {
         })
     },
 
+    forgotPassword(ctx, user) {
+        return new Promise((resolve, reject) => {
+            axios.post('/api/forgot-password', {
+                email: user.email,
+            }).then(response => {
+                if(response.data) {
+                    window.location.replace('/login')
+                    resolve()
+                } else {
+                    reject(response)
+                }
+            }).catch((error) => {
+                if(error.response.status === 422) {
+                    ctx.commit('setErrors', error.response.data.errors)
+                } else if (error.response.status === 500) {
+                    ctx.commit('setInvalidCredentials', error.response.data.error)
+                }
+            })
+        })
+    },
+
     logout(ctx) {
         return new Promise((resolve) => {
             localStorage.removeItem('token');
