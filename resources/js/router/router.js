@@ -7,6 +7,9 @@ import UserProfile from "../views/pages/UserProfile";
 import Middleware from "../middleware";
 import store from "../store";
 import middlewarePipeline from "./middlewarePipeline";
+import ForgotPassword from "../views/Auth/ForgotPassword";
+import ResetPassword from "../views/Auth/ResetPassword";
+
 
 const routes = [
     {
@@ -52,6 +55,16 @@ const routes = [
         path: "/userprofile",
         name: UserProfile,
         component: UserProfile
+    },
+    {
+        path: "/forgot-password",
+        name: ForgotPassword,
+        component: ForgotPassword
+    },
+    {
+        path: "/reset-password",
+        name: ResetPassword,
+        component: ResetPassword,
     }
 
 ]
