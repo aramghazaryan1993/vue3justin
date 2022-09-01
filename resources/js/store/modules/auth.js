@@ -74,6 +74,50 @@ const actions = {
         })
     },
 
+    // resetPassword(ctx, payload) {
+    //     return new Promise((resolve, reject) => {
+    //         axios
+    //             .post('/api/reset-password', payload)
+    //             .then((response) => {
+    //                 window.location.replace('/login')
+    //                 resolve(response);
+    //             })
+    //             .then(response => {
+    //             if (response.data) {
+    //                 window.location.replace('/login')
+    //                 resolve(response)
+    //             } else {
+    //                 reject(response)
+    //             }
+    //         }).catch((error) => {
+    //             if(error.response.status === 422) {
+    //                 ctx.commit('setErrors', error.response.data.errors)
+    //             } else if (error.response.status === 500) {
+    //                 ctx.commit('setInvalidCredentials', error.response.data.error)
+    //             }
+    //         })
+    //     })
+    // },
+
+    resetPassword(ctx, payload) {
+        return new Promise((resolve, reject) => {
+            axios
+                .post('/api/reset-password', payload)
+                .then((response) => {
+                    window.location.replace('/login')
+                    resolve();
+                })
+                .catch((error) => {
+                    console.log(error.response)
+                    if (error.response.status === 422) {
+                        ctx.commit('setErrors', error.response.data.errors)
+                    } else if (error.response.status === 500)
+                        ctx.commit('setInvalidCredentials', error.response.data.error)
+                })
+        })
+    },
+
+
     logout(ctx) {
         return new Promise((resolve) => {
             localStorage.removeItem('token');

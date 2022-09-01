@@ -16,7 +16,6 @@ class ResetPasswordController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required |string | email | max:255',
             'password' => 'required|between:8,max:255,confirmed',
-            'token' => 'required',
         ]);
         if ($validator->fails()) {
             return response(['errors' => $validator->errors()->all()], 422);
@@ -62,7 +61,7 @@ class ResetPasswordController extends Controller
 
     protected function sendResetFailedResponse(Request $request, $response) {
         return $response->json([
-           "message" => "Password reset failed",
+           "error" => "Password was changed",
            "response" => $response
         ], 500);
     }
