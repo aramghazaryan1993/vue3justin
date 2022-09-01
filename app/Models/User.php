@@ -48,4 +48,16 @@ class User extends Authenticatable
     {
         $this->notify(New ResetPasswordtNotification($token));
     }
+
+    public function hasRoleTo(...$roles) {
+        return $this->roles()->whereIn('slug', $roles)->count();
+    }
+
+    public function roles() {
+        return $this->belongsToMany(Role::class, 'users_roles');
+    }
+
+    public function permissions() {
+        return $this->belongsToMany(Permission::class, 'users_permissions');
+    }
 }
