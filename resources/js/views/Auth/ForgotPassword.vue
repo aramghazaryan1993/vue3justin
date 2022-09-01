@@ -7,7 +7,7 @@
             Invalid Credentials
         </div>
         <validation-errors v-if="validationErrors" :errors="validationErrors"></validation-errors>
-        <div class="login-page">
+        <div class="forgot-page">
             <form class="form">
                 <my-input type="text" placeholder="email address" v-model="user.email"/>
                 <my-button type="submit" @click.prevent="sendForgotPassword" >Send Email</my-button>
@@ -53,30 +53,32 @@ export default {
 </script>
 
 <style lang="scss">
-.login-page {
+.forgot-page {
     width: 360px;
     padding: 8% 0 0;
     margin: auto;
     display: flex;
 }
 
+/* The alert message box */
 .alert {
     padding: 20px;
-    background-color: #f44336;
+    background-color: #f44336; /* Red */
     color: white;
     margin-bottom: 15px;
 }
-
+/* The close button */
 .closebtn {
     margin-left: 15px;
     color: white;
+    font-weight: bold;
     float: right;
-    font-size: 20px;
+    font-size: 22px;
     line-height: 20px;
     cursor: pointer;
     transition: 0.3s;
 }
-
+/* When moving the mouse over the close button */
 .closebtn:hover {
     color: black;
 }

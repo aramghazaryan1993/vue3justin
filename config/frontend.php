@@ -1,5 +1,5 @@
 <?php
-
-    [
-        "reset_password_url" => env('FRONT_APP') . env('FRONT_FORGOT_PASSWORD')
-    ];
+//
+//    [
+//        "reset_password_url" => env('FRONT_APP') . env('FRONT_FORGOT_PASSWORD')
+//    ];
