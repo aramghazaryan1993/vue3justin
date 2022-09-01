@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Laravel\Passport\Client;
 use Illuminate\Http\Request;
@@ -59,11 +60,15 @@ class AuthController extends Controller
             return response(['errors' => $validator->errors()->all()], 422);
         }
 
+        $developerRole = Role::developer()->first();
+
         $users = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        $users->roles()->attach($developerRole->id);
 
         if(!$users) {
             return response()->json(["success" => false, "message" => 'Registration failed'], 500);
