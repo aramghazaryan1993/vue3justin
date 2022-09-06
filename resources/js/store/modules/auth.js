@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../../axios/axios-instance";
 
 const state = {
     userDetails: {},
@@ -39,6 +39,7 @@ const actions = {
                 .then(response => {
                     if (response.data.access_token) {
                         localStorage.setItem('token', response.data.access_token)
+                        ctx.commit('setLoggedIn', true)
                         window.location.replace("/dashboard")
                     }
                 }).catch((error) => {
@@ -136,7 +137,19 @@ const actions = {
             ctx.commit('setLoggedIn', false)
             resolve(false)
         })
-    }
+    },
+
+    currentUser(ctx) {
+        return new Promise((resolve, reject) => {
+            axios.get('user')
+                .then((response) =>{
+                    ctx.commit('setUserDetails', response.data.data)
+                    console.log(response)
+                }).catch((error) => {
+                reject(error)
+            })
+        })
+    },
 }
 
 const mutations = {
@@ -148,6 +161,9 @@ const mutations = {
     },
     setInvalidCredentials(state, invalidCredentials) {
         state.invalidCredentials = invalidCredentials
+    },
+    setUserDetails(state, payload) {
+        state.userDetails = payload
     }
 }
 

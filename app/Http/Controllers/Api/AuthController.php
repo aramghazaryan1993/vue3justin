@@ -23,6 +23,8 @@ class AuthController extends Controller
             return response(['errors' => $validator->errors()->all()], 422);
         }
 
+
+
         $passwordGrantClient = Client::where('password_client', 1)->first();
 
         $data = [
@@ -34,6 +36,8 @@ class AuthController extends Controller
             'scope' => '*'
         ];
 
+
+
         $tokenRequest = Request::create('/oauth/token', 'post', $data);
         $tokenResponse = app()->handle($tokenRequest);
         $contentString = $tokenResponse->getContent();
@@ -42,10 +46,12 @@ class AuthController extends Controller
         if(!empty($tokenContent['access_token'])) {
             return $tokenResponse;
         }
-
+        dd($tokenResponse);
         return response()->json([
             'error' => 'Invalid credentials'
         ], 401);
+
+
     }
 
     public function register(Request $request){
