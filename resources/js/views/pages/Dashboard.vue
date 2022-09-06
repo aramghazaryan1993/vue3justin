@@ -20,6 +20,9 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     name: "Dashboard",
     data: () => ({}),
+    mounted() {
+        this.$store.dispatch('auth/currentUser')
+    },
     computed: {
         ...mapGetters({
             loggedIn: 'auth/loggedIn'
