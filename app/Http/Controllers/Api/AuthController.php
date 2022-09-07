@@ -46,7 +46,7 @@ class AuthController extends Controller
         if(!empty($tokenContent['access_token'])) {
             return $tokenResponse;
         }
-        dd($tokenResponse);
+
         return response()->json([
             'error' => 'Invalid credentials'
         ], 401);
