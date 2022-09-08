@@ -21,10 +21,10 @@
             <hr />
             <div class="stats">
                 <h2> Name: {{currentUser.name }}</h2>
-<!--                <hr />-->
-<!--                <h2>Email: {{ currentUser.email }}</h2>-->
-<!--                <hr />-->
-<!--                <h2> Joined: {{ currentUser.created_at}}</h2>-->
+                <hr />
+                <h2>Email: {{ currentUser.email }}</h2>
+                <hr />
+                <h2> Joined: {{ currentUser.created_at}}</h2>
                 <hr />
 
 
