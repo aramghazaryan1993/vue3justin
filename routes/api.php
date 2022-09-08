@@ -16,11 +16,14 @@ use App\Http\Controllers\Api\ResetPasswordController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//
+//    return  $request->user();
+//});
 
-    return  $request->user();
+Route::group(['middleware' => 'auth:api'], function () {
+   Route::get('user', [\App\Http\Controllers\Api\UsersController::class, 'user']);
 });
-
 
 Route::post('register', [AuthController::class, "register"]);
 Route::post('login', [AuthController::class, "login"]);
