@@ -2,7 +2,7 @@
  <div>
      <nav>
          <ul class="navigation">
-             <li><a href="">Profile</a></li>
+            <router-link to="/profile"> <li><a href="">Profile</a></li></router-link>
              <li><a href="">Settings</a></li>
              <li><a href="">My Book</a></li>
          </ul>
@@ -20,17 +20,22 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     name: "Dashboard",
     data: () => ({}),
+    created() {
+        this.checkUserState()
+    },
     mounted() {
         this.$store.dispatch('auth/currentUser')
     },
     computed: {
         ...mapGetters({
-            loggedIn: 'auth/loggedIn'
+            loggedIn: 'auth/loggedIn',
+  //          userDetails: "auth/userDetails",
         })
     },
     methods: {
         ...mapActions({
-            logout: 'auth/logout'
+            logout: 'auth/logout',
+            checkUserState: 'auth/setLoggedInstate',
         })
     }
 

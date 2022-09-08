@@ -40,6 +40,7 @@ const actions = {
                     if (response.data.access_token) {
                         localStorage.setItem('token', response.data.access_token)
                         ctx.commit('setLoggedIn', true)
+                        ctx.dispatch('currentUser').then(() => resolve(response))
                         window.location.replace("/dashboard")
                     }
                 }).catch((error) => {
@@ -133,17 +134,19 @@ const actions = {
             if (localStorage.getItem('token')) {
                 ctx.commit('setLoggedIn', true)
                 resolve(true)
+            } else{
+                ctx.commit('setLoggedIn', false)
+                resolve(false)
             }
-            ctx.commit('setLoggedIn', false)
-            resolve(false)
+
         })
     },
 
     currentUser(ctx) {
         return new Promise((resolve, reject) => {
-            axios.get('user')
+            axios.get('/api/user')
                 .then((response) =>{
-                    ctx.commit('setUserDetails', response.data.data)
+                    ctx.commit('setUserDetails', response.data)
                     console.log(response)
                 }).catch((error) => {
                 reject(error)
