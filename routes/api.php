@@ -22,7 +22,9 @@ use App\Http\Controllers\Api\ResetPasswordController;
 //});
 
 Route::group(['middleware' => 'auth:api'], function () {
-   Route::get('user', [\App\Http\Controllers\Api\UsersController::class, 'user']);
+    Route::get('user', [\App\Http\Controllers\Api\UsersController::class, 'user']);
+    Route::post('change-password', [App\Http\Controllers\Api\UsersController::class,'changePassword']);
+    Route::post('change-details', [App\Http\Controllers\Api\UsersController::class,'changeDetails']);
 });
 
 Route::post('register', [AuthController::class, "register"]);
