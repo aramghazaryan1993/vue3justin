@@ -14,11 +14,6 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-//        return [
-//          'name' => $this->name,
-//          'email' => $this->email,
-//          'created_at' => $this->created_at->format('Y-m-d'),
-//        ];
         $userRoles = $this->roles()->with('permissions')->get();
         $roles = $userRoles->pluck('slug');
         $rolesPermissions = $userRoles->pluck('permissions')->flatten(2)->pluck('slug');
