@@ -2,81 +2,40 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Actions\Auth\LoginAction;
+use App\Actions\Auth\RegisterAction;
 use App\Http\Controllers\Controller;
-use App\Models\Role;
-use App\Models\User;
-use Laravel\Passport\Client;
+use App\Http\Requests\UserLoginRequest;
+use App\Http\Requests\UserRegisterRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function login(Request $request){
 
-        $validator = Validator::make($request->all(), [
-            'email' => 'required | string | email | max:255',
-            'password' => 'required | between:8, 255',
-        ]);
+    public function login(UserLoginRequest $request, LoginAction $loginAction)
+    {
+        $passportRequest = $loginAction->run($request->all());
+        $tokenContent = $passportRequest["content"];
 
-        if($validator->fails()) {
-            return response(['errors' => $validator->errors()->all()], 422);
+        if (!empty($tokenContent['access_token'])) {
+            return $passportRequest["response"];
         }
 
-
-
-        $passwordGrantClient = Client::where('password_client', 1)->first();
-
-        $data = [
-          'grant_type' =>  'password',
-          'client_id' =>   $passwordGrantClient->id,
-            'client_secret' => $passwordGrantClient->secret,
-            'username' => $request->email,
-            'password' => $request->password,
-            'scope' => '*'
-        ];
-
-
-
-        $tokenRequest = Request::create('/oauth/token', 'post', $data);
-        $tokenResponse = app()->handle($tokenRequest);
-        $contentString = $tokenResponse->getContent();
-        $tokenContent = json_decode($contentString,true);
-
-        if(!empty($tokenContent['access_token'])) {
-            return $tokenResponse;
-        }
-
-        return response()->json([
+      return response()->json([
             'error' => 'Invalid credentials'
         ], 401);
 
-
+//        return response()->json([
+//            'message' => 'Authenticated'
+//        ]);
     }
 
-    public function register(Request $request){
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string | max:255',
-            'email' => 'required | string | email | max:255 |unique:users',
-            'password' => 'required | between:8, 255 | confirmed',
-        ]);
+    public function register(UserRegisterRequest $request, RegisterAction $registerAction){
 
-        if($validator->fails()) {
-            return response(['errors' => $validator->errors()->all()], 422);
-        }
+        $user = $registerAction->run($request->all());
 
-        $developerRole = Role::developer()->first();
-
-        $users = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        $users->roles()->attach($developerRole->id);
-
-        if(!$users) {
+        if(!$user) {
             return response()->json(["success" => false, "message" => 'Registration failed'], 500);
         }
 
