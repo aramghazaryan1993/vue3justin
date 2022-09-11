@@ -25,6 +25,6 @@ class UserResource extends JsonResource
             "created_at" => $this->created_at->format('Y-m-d'),
             "roles" => $roles,
             "permissions" => $userPermissions,
-
-        ];    }
+        ];
+    }
 }

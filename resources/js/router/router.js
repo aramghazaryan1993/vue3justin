@@ -38,17 +38,19 @@ const routes = [
         path: "/settings",
         name: Settings,
         component: Settings,
-        // meta: {
-        //     middleware: [Middleware.auth]
-        // },
+        meta: {
+            middleware: [Middleware.auth]
+        },
+        roles: ['admin']
     },
     {
         path: "/dashboard",
         name: Dashboard,
         component: Dashboard,
-        // meta: {
-        //     middleware: [Middleware.auth]
-        // },
+        meta: {
+            middleware: [Middleware.auth]
+        },
+        roles: ['admin'],
         children: [
             {
                 path: "/dashboard/userprofile",
@@ -64,9 +66,9 @@ const routes = [
         path: "/profile",
         name: UserProfile,
         component: UserProfile,
-        // meta: {
-        //     middleware: [Middleware.auth]
-        // },
+        meta: {
+            middleware: [Middleware.auth, Middleware.admin]
+        },
 
     },
     {
