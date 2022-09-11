@@ -10,7 +10,7 @@ import middlewarePipeline from "./middlewarePipeline";
 import ForgotPassword from "../views/Auth/ForgotPassword";
 import ResetPassword from "../views/Auth/ResetPassword";
 import Settings from "../views/pages/Settings";
-
+import VerifyEmail from "../views/Auth/VerifyEmail";
 
 const routes = [
     {
@@ -80,7 +80,11 @@ const routes = [
         path: "/reset-password/:token",
         name: ResetPassword,
         component: ResetPassword,
-    }
+    },
+    {   path: '/verify-email',
+        name: 'VerifyEmail',
+        component: VerifyEmail,
+    },
 
 ]
 

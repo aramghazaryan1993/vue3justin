@@ -60,7 +60,7 @@ class VerifyNotification extends Notification
 
 
 
-        $url = url('api/email-verification') . '?' . http_build_query($params + compact('signature'), false);
+        $url = url('verify-email') . '?' . http_build_query($params + compact('signature'), false);
 
         return (new MailMessage)
             ->line('THE VERIFY EMAIL.')
