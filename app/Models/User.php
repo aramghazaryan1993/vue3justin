@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\ResetPasswordtNotification;
+use App\Notifications\VerifyNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -59,5 +60,9 @@ class User extends Authenticatable
 
     public function permissions() {
         return $this->belongsToMany(Permission::class, 'users_permissions');
+    }
+
+    public function sendEmailVerificationNotification() {
+        $this->notify(new VerifyNotification());
     }
 }
