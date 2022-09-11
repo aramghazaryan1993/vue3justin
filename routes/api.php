@@ -3,11 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-<<<<<<< Updated upstream
 use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\ResetPasswordController;
-=======
->>>>>>> Stashed changes
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,12 +28,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('change-details', [App\Http\Controllers\Api\UsersController::class,'changeDetails']);
 });
 
-<<<<<<< Updated upstream
+
 Route::post('register', [AuthController::class, "register"]);
 Route::post('login', [AuthController::class, "login"]);
 Route::post('forgot-password', [ForgotPasswordController::class, "sendResetLinkEmail"]);
 Route::post('reset-password', [ResetPasswordController::class, "reset"]);
-=======
-
-Route::post('register', [AuthController::class, "register"]);
->>>>>>> Stashed changes
+Route::get('/email-verification', [App\Http\Controllers\Api\VerificationController::class, "verify"])->name('verification.verify');
