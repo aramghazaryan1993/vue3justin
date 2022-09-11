@@ -33,4 +33,4 @@ Route::post('register', [AuthController::class, "register"]);
 Route::post('login', [AuthController::class, "login"]);
 Route::post('forgot-password', [ForgotPasswordController::class, "sendResetLinkEmail"]);
 Route::post('reset-password', [ResetPasswordController::class, "reset"]);
-Route::get('/email-verification', [App\Http\Controllers\Api\VerificationController::class, "verify"])->name('verification.verify');
+//Route::get('/email-verification', [App\Http\Controllers\Api\VerificationController::class, "verify"])->name('verification.verify');
